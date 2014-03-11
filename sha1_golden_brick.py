@@ -12,7 +12,8 @@ except IOError:
     exit(1)
 else:
    with f:
-      contents = f.read()
-      print hashlib.sha1(contents).hexdigest()
+      sha1 = hashlib.sha1()
+      sha1.update(f.read())
+      print sha1.hexdigest()
       
 exit(0)

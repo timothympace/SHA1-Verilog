@@ -4,7 +4,6 @@ module sha1_compression(
    input  [  6:0] round,
    output [159:0] hash_state_out
 );
-
    reg  [31:0] k;
    reg  [31:0] f;
    wire [31:0] temp;
@@ -27,10 +26,14 @@ module sha1_compression(
       endcase
    end
    
-   function reg between(input [6:0] low, value, high); 
+   function reg between(
+      input [6:0] low,
+      input [6:0] value,
+      input [6:0] high
+   ); 
       begin
          between = value >= low && value <= high;
       end
    endfunction
-
+   
 endmodule
