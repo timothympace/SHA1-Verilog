@@ -93,26 +93,11 @@ module t_sha1();
          end
          
          for (i = 10'd1023; i != ~32'd0; i = i - 1'b1) begin
-            if (i > 1'b1 + pad_amount + 6'd63 + offset) begin
-               $display("i is: %d for copying bytes\n", i);
-               sha1_pad_bytes[i] = bytes[i];
-            end
-            else if (i == pad_amount + 1'b1 + 6'd63 + offset) begin
-               $display("i is: %d for copying the 1\n", i);
-               sha1_pad_bytes[i] = 1'b1;
-            end
-            else if (i > 6'd63 + offset) begin
-               $display("i is: %d for copying the 0's\n", i);
-               sha1_pad_bytes[i] = 1'b0;
-            end
-            else if (i > offset) begin 
-               $display("i is: %d for copying the length. index into array is %d and val is %h and offset is %h\n", i, (i - offset) - 1'b1, bits_in_file[(i-offset) - 1'b1], offset);
-               sha1_pad_bytes[i] = bits_in_file[i - offset];
-            end
-            else begin
-               $display("i is: %d for copying z's\n", i);
-               sha1_pad_bytes[i] = 1'b0;
-            end
+            if (i > 1'b1 + pad_amount + 6'd63 + offset) sha1_pad_bytes[i] = bytes[i];
+            else if (i == pad_amount + 1'b1 + 6'd63 + offset) sha1_pad_bytes[i] = 1'b1;
+            else if (i > 6'd63 + offset) sha1_pad_bytes[i] = 1'b0;
+            else if (i > offset) sha1_pad_bytes[i] = bits_in_file[i - offset];
+            else sha1_pad_bytes[i] = 1'b0;
          end
       end
    endfunction
