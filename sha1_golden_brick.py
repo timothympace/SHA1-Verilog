@@ -6,7 +6,7 @@ if (len(sys.argv) != 2):
    exit(1)
 
 try:
-    f = open(sys.argv[1])
+    f = open(sys.argv[1], 'rb')
 except IOError:
     print sys.argv[0]+":", "error: file", sys.argv[1], "does not exist"
     exit(1)
