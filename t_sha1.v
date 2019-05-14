@@ -1,3 +1,6 @@
+fds
+
+
 module t_sha1();
    reg           clk;
    reg           start;
